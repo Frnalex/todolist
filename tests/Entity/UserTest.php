@@ -3,22 +3,10 @@
 namespace App\Tests\Entity;
 
 use App\Entity\User;
-use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
-use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class UserTest extends KernelTestCase
 {
-    /** @var AbstractDatabaseTool */
-    protected $databaseTool;
-
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->databaseTool = self::getContainer()->get(DatabaseToolCollection::class)->get();
-    }
-
     public function getEntity(): User
     {
         $user = (new User())
@@ -52,7 +40,6 @@ class UserTest extends KernelTestCase
 
     public function testEntityIsNotUnique()
     {
-        $this->databaseTool->loadFixtures(['App\DataFixtures\UserFixtures']);
         $this->assertHasErrors($this->getEntity()->setEmail('user1@gmail.com'), 1);
         $this->assertHasErrors($this->getEntity()->setUsername('user1'), 1);
     }
