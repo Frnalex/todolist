@@ -62,4 +62,29 @@ class TaskController extends AbstractController
             'task' => $task,
         ]);
     }
+
+    #[Route('/tasks/{id}/toggle', name: 'task_toggle')]
+    public function toggleAction(Task $task, TaskUseCase $taskUseCase): Response
+    {
+        $task->toggle(!$task->isDone());
+        $taskUseCase->toggleAction($task);
+
+        if ($task->isDone()) {
+            $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));
+        } else {
+            $this->addFlash('warning', sprintf('La tâche %s a bien été marquée comme non faite.', $task->getTitle()));
+        }
+
+        return $this->redirectToRoute('task_list');
+    }
+
+    #[Route('/tasks/{id}/delete', name: 'task_delete')]
+    public function deleteAction(Task $task, TaskUseCase $taskUseCase)
+    {
+        $taskUseCase->deleteAction($task);
+
+        $this->addFlash('success', 'La tâche a bien été supprimée.');
+
+        return $this->redirectToRoute('task_list');
+    }
 }

@@ -8,12 +8,12 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserUseCase implements UserUseCaseInterface
 {
-    private $em;
+    private $entityManager;
     private $hasher;
 
-    public function __construct(EntityManagerInterface $em, UserPasswordHasherInterface $hasher)
+    public function __construct(EntityManagerInterface $entityManager, UserPasswordHasherInterface $hasher)
     {
-        $this->em = $em;
+        $this->entityManager = $entityManager;
         $this->hasher = $hasher;
     }
 
@@ -22,8 +22,8 @@ class UserUseCase implements UserUseCaseInterface
         $hash = $this->hasher->hashPassword($user, $user->getPassword());
         $user->setPassword($hash);
 
-        $this->em->persist($user);
-        $this->em->flush();
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
     }
 
     public function editAction(User $user)
@@ -31,6 +31,6 @@ class UserUseCase implements UserUseCaseInterface
         $hash = $this->hasher->hashPassword($user, $user->getPassword());
         $user->setPassword($hash);
 
-        $this->em->flush();
+        $this->entityManager->flush();
     }
 }

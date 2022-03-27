@@ -12,8 +12,7 @@ class TaskTest extends KernelTestCase
         return (new Task())
             ->setTitle('Title')
             ->setContent('Lorem ipsum, dolor sit amet')
-            ->setCreatedAt(new \DateTimeImmutable())
-            ->setIsDone(false);
+        ;
     }
 
     public function assertHasErrors(Task $task, int $number = 0)

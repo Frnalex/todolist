@@ -57,4 +57,28 @@ class TaskControllerTest extends WebTestCase
 
         $this->assertRouteSame('task_list');
     }
+
+    public function testToggleAction()
+    {
+        $client = static::createAuthenticatedClient();
+        $client->request(Request::METHOD_GET, '/tasks/1/toggle');
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
+
+        $client->followRedirect();
+
+        $this->assertRouteSame('task_list');
+    }
+
+    public function testDeleteAction()
+    {
+        $client = static::createAuthenticatedClient();
+        $client->request(Request::METHOD_GET, '/tasks/1/delete');
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
+
+        $client->followRedirect();
+
+        $this->assertRouteSame('task_list');
+    }
 }

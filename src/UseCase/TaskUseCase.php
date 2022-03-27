@@ -7,24 +7,32 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class TaskUseCase implements TaskUseCaseInterface
 {
-    private $em;
+    private $entityManager;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->em = $em;
+        $this->entityManager = $entityManager;
     }
 
     public function createAction(Task $task)
     {
-        $this->em->persist($task);
-        $this->em->flush();
+        $this->entityManager->persist($task);
+        $this->entityManager->flush();
     }
 
     public function editAction(Task $task)
     {
-        //     $hash = $this->hasher->hashPassword($user, $user->getPassword());
-    //     $user->setPassword($hash);
+        $this->entityManager->flush();
+    }
 
-    //     $this->em->flush();
+    public function toggleAction(Task $task)
+    {
+        $this->entityManager->flush();
+    }
+
+    public function deleteAction(Task $task)
+    {
+        $this->entityManager->remove($task);
+        $this->entityManager->flush();
     }
 }
