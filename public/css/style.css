@@ -12,6 +12,7 @@
 /* COMPONENTS */
 /* --- section */
 /* --- alert */
+/* --- task */
 
 /* VARIABLES */
 /* ================== */
@@ -99,6 +100,13 @@ body {
 
 .text-error {
     color: var(--color-error);
+}
+.text-warning {
+    color: var(--color-warning);
+}
+
+.text-bold {
+    font-weight: bold;
 }
 
 @media screen and (min-width: 768px) {
@@ -279,4 +287,34 @@ textarea {
 .alert.alert-error {
     color: var(--color-error);
     background-color: rgba(var(--rgb-error), 0.1);
+}
+
+/* --- task */
+.task {
+    padding: 1rem 0;
+}
+
+.task + .task {
+    border-top: 1px solid var(--color-secondary);
+}
+
+.task__toggle {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    border: 2px solid var(--color-secondary);
+    margin-right: 0.5rem;
+}
+
+.task__title {
+    font-weight: 500;
+}
+
+.task.isDone .task__toggle {
+    border: 2px solid var(--color-success);
+    background-color: var(--color-success);
+}
+.task.isDone .task__title {
+    color: var(--color-secondary);
+    text-decoration: line-through;
 }
