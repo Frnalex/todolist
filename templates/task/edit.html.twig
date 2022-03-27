@@ -1,17 +1,40 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<h1>Modifier
-		<strong>{{ task.title }}</strong>
-	</h1>
 
-	<div class="row">
-		{{ form_start(form, {'action': path('task_create')}) }}
-		{{ form_widget(form) }}
+	<section class="section">
+		<div class="section__header">
+			<h1 class="text-md">Modifier
+				{{ task.title }}</h1>
+		</div>
 
-		<button type="submit" class="btn btn-success pull-right">Modifier</button>
-		{{ form_end(form) }}
+		<div class="section__content w-100">
+			{{ form_start(form, {'attr': {'class': 'form'}}) }}
 
-		<a href="{{ path('task_list') }}" class="btn btn-primary">Retour à la liste des tâches</a>
-	</div>
+			<div>
+				{{ form_label(form.title) }}
+				{{ form_widget(form.title) }}
+				<div class="text-error">
+					{{ form_errors(form.title) }}
+				</div>
+			</div>
+
+			<div>
+				{{ form_label(form.content) }}
+				{{ form_widget(form.content) }}
+				<div class="text-error">
+					{{ form_errors(form.content) }}
+				</div>
+			</div>
+
+			<button type="submit" class="button">Modifier</button>
+
+			<div class="flex center">
+				<a href="{{ path('task_list') }}" class="button-secondary">Retour à la liste des tâches</a>
+			</div>
+
+			{{ form_end(form) }}
+		</div>
+
+	</section>
 {% endblock %}
