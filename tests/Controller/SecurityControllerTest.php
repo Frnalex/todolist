@@ -1,11 +1,14 @@
 <?php
 
+use App\Tests\AuthenticationTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class SecurityControllerTest extends WebTestCase
 {
+    use AuthenticationTrait;
+
     public function testDisplayLogin()
     {
         $client = static::createClient();
@@ -50,6 +53,23 @@ class SecurityControllerTest extends WebTestCase
 
         $client->submit($form);
 
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
+
+        $client->followRedirect();
+
+        $this->assertRouteSame('login');
+    }
+
+    public function testLogout()
+    {
+        $client = static::createAuthenticatedClient();
+
+        $client->request(Request::METHOD_GET, '/logout');
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
+
+        $client->followRedirect();
+
+        $this->assertRouteSame('homepage');
         $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
 
         $client->followRedirect();
