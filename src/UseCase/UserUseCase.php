@@ -28,6 +28,9 @@ class UserUseCase implements UserUseCaseInterface
 
     public function editAction(User $user)
     {
-        // code...
+        $hash = $this->hasher->hashPassword($user, $user->getPassword());
+        $user->setPassword($hash);
+
+        $this->em->flush();
     }
 }

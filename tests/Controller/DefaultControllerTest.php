@@ -1,12 +1,14 @@
 <?php
 
-use App\Repository\UserRepository;
+use App\Tests\AuthenticationTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class DefaultControllerTest extends WebTestCase
 {
+    use AuthenticationTrait;
+
     public function testUserIsNotLoggedIn()
     {
         $client = static::createClient();
@@ -17,14 +19,7 @@ class DefaultControllerTest extends WebTestCase
 
     public function testUserIsLoggedIn()
     {
-        $client = static::createClient();
-        $userRepository = static::getContainer()->get(UserRepository::class);
-
-        // retrieve the test user
-        $testUser = $userRepository->findOneBy(['username' => 'user1']);
-
-        // simulate $testUser being logged in
-        $client->loginUser($testUser);
+        $client = static::createAuthenticatedClient();
 
         // test e.g. the profile page
         $client->request('GET', '/');
