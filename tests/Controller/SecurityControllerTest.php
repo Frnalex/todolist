@@ -26,7 +26,7 @@ class SecurityControllerTest extends WebTestCase
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
 
-        $form = $crawler->selectButton('Se connecter')->form([
+        $form = $crawler->selectButton('Connexion')->form([
             '_username' => 'user1',
             '_password' => 'password',
         ]);
@@ -46,7 +46,7 @@ class SecurityControllerTest extends WebTestCase
 
         $crawler = $client->request(Request::METHOD_GET, '/login');
 
-        $form = $crawler->selectButton('Se connecter')->form([
+        $form = $crawler->selectButton('Connexion')->form([
             '_username' => 'badUsername',
             '_password' => 'badPassword',
         ]);

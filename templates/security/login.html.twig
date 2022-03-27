@@ -1,20 +1,28 @@
 {% extends 'base.html.twig' %}
 
+{% block header %}
+	<header class="header">
+		<h1 class="text-lg">Connexion</h1>
+	</header>
+{% endblock %}
+
 {% block body %}
-	{% if error %}
-		<div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-	{% endif %}
-
-	<form action="{{ path('login_check') }}" method="post">
-		<label for="username">Nom d'utilisateur :</label>
-		<input type="text" id="username" name="_username" value="{{ last_username }}"/>
-
-		<label for="password">Mot de passe :</label>
-		<input type="password" id="password" name="_password"/>
-
-		<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-		<input type="hidden" name="_target_path" value="/"/>
-
-		<button class="btn btn-success" type="submit">Se connecter</button>
-	</form>
+	<section class="section">
+		<div class="section__content">
+			<form class="form" action="{{ path('login_check') }}" method="post">
+				{% if error %}
+					<div class="alert alert-error" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+				{% endif %}
+				<div>
+					<label for="username" class="form-label">Nom d'utilisateur :</label>
+					<input type="text" class='form-control' id="username" name="_username" placeholder='Utilisateur' value="{{ last_username }}"/>
+				</div>
+				<div>
+					<label for="password" class="form-label">Mot de passe</label>
+					<input type="password" class="form-control" id="password" name="_password" placeholder='Mot de passe'/>
+				</div>
+				<button type="submit" class="button">Connexion</button>
+			</form>
+		</div>
+	</section>
 {% endblock %}
