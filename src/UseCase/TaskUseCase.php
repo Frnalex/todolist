@@ -27,6 +27,7 @@ class TaskUseCase implements TaskUseCaseInterface
 
     public function toggleAction(Task $task)
     {
+        $task->toggle(!$task->isDone());
         $this->entityManager->flush();
     }
 

@@ -66,7 +66,6 @@ class TaskController extends AbstractController
     #[Route('/tasks/{id}/toggle', name: 'task_toggle')]
     public function toggleAction(Task $task, TaskUseCase $taskUseCase): Response
     {
-        $task->toggle(!$task->isDone());
         $taskUseCase->toggleAction($task);
 
         if ($task->isDone()) {
