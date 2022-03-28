@@ -65,11 +65,13 @@ class SecurityControllerTest extends WebTestCase
         $client = static::createAuthenticatedClient();
 
         $client->request(Request::METHOD_GET, '/logout');
+
         $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
 
         $client->followRedirect();
 
         $this->assertRouteSame('homepage');
+        
         $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
 
         $client->followRedirect();
