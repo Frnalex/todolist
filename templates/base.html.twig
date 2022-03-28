@@ -32,8 +32,9 @@
 				</button>
 				<nav class="nav" id='js-menu'>
 					<button class="mb-2 text-bold nav__close" id="js-close-menu">Fermer</button>
-					<a href="{{ path('task_list') }}">Tâches</a>
-					<a href="{{ path('user_list') }}">Utilisateurs</a>
+					{% set current_path = app.request.get('_route') %}
+					<a href="{{ path('task_list') }}" {% if current_path == "task_list" %} class="active" {% endif %}>Tâches</a>
+					<a href="{{ path('user_list') }}" {% if current_path == "user_list" %} class="active" {% endif %}>Utilisateurs</a>
 					<a href="{{ path('logout') }}" class="text-error">Déconnexion</a>
 				</nav>
 			</header>
