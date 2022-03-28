@@ -1,36 +1,45 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<h1>Liste des utilisateurs</h1>
-	{% if users|length == 0 %}
-		<div class="alert alert-warning" role="alert">
-			Il n'y a pas encore d'utilisateur enregistré.
-			<a href="{{ path('user_create') }}" class="btn btn-warning pull-right">Créer un utilisateur</a>
+	<section class="section">
+		<div class="section__header">
+			<div class="flex space">
+				<h1 class="text-md">Liste des utilisateurs</h1>
+				<a href="{{ path('user_create') }}" class="button button-round">+</a>
+			</div>
 		</div>
-	{% else %}
-		<div class="row">
-			<table class="table">
-				<thead>
-					<tr>
-						<th>#</th>
-						<th>Nom d'utilisateur</th>
-						<th>Adresse d'utilisateur</th>
-						<th>Actions</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for user in users %}
+
+		<div class="section__content w-100">
+			{% if users|length == 0 %}
+				<div class="alert alert-warning" role="alert">
+					Il n'y a pas encore d'utilisateur enregistré.
+				</div>
+			{% else %}
+				<table class="table">
+					<thead>
 						<tr>
-							<th scope="row">{{ loop.index }}</th>
-							<td>{{ user.username }}</td>
-							<td>{{ user.email }}</td>
-							<td>
-								<a href="{{ path('user_edit', {'id' : user.id}) }}" class="btn btn-success btn-sm">Edit</a>
-							</td>
+							<th>Nom d'utilisateur</th>
+							<th>Adresse d'utilisateur</th>
+							<th class="align-right">Actions</th>
 						</tr>
-					{% endfor %}
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						{% for user in users %}
+							<tr>
+								<td>{{ user.username }}</td>
+								<td>{{ user.email }}</td>
+								<td class="align-right">
+									<a href="{{ path('user_edit', {'id' : user.id}) }}" class="text-warning">Modifier</a>
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			{% endif %}
+
 		</div>
-	{% endif %}
+
+	</section>
+
+
 {% endblock %}

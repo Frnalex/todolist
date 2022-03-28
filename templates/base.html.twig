@@ -20,17 +20,24 @@
 	<body>
 		{% block header %}
 			<header class="header">
-				<h1 class="text-lg">To Do List app</h1>
+				<h1 class="text-lg">
+					<a href="{{ path('homepage') }}">To Do List app</a>
+				</h1>
+				<nav class="nav">
+					<a href="{{ path('task_list') }}">Tâches</a>
+					<a href="{{ path('user_list') }}">Utilisateurs</a>
+					<a href="{{ path('logout') }}" class="text-error">Déconnexion</a>
+				</nav>
 			</header>
 		{% endblock %}
 		{# <nav class="navbar navbar-light navbar-fixed-top" style="background-color: #e3f2fd;" role="navigation">
-															<div class="container">
-																<div class="navbar-header">
-																	<a class="navbar-brand" href="#">To Do List app</a>
-																	<img src="/images/Logo_OpenClassrooms.png" alt="OpenClassrooms"/>
-																</div>
-															</div>
-														</nav> #}
+																							<div class="container">
+																								<div class="navbar-header">
+																									<a class="navbar-brand" href="#">To Do List app</a>
+																									<img src="/images/Logo_OpenClassrooms.png" alt="OpenClassrooms"/>
+																								</div>
+																							</div>
+																						</nav> #}
 
 		<main class="main">
 			<div class="container"> {% block body %}{% endblock %}
