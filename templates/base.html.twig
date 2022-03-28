@@ -15,7 +15,9 @@
 			<link href="/css/style.css" rel="stylesheet">
 		{% endblock %}
 
-		{% block javascripts %}{% endblock %}
+		{% block javascripts %}
+			<script src="/js/script.js" defer></script>
+		{% endblock %}
 	</head>
 	<body>
 		{% block header %}
@@ -23,21 +25,19 @@
 				<h1 class="text-lg">
 					<a href="{{ path('homepage') }}">To Do List app</a>
 				</h1>
-				<nav class="nav">
+				<button class="nav__open" id="js-open-menu">
+					<span class="line-1"></span>
+					<span class="line-2"></span>
+					<span class="line-3"></span>
+				</button>
+				<nav class="nav" id='js-menu'>
+					<button class="mb-2 text-bold nav__close" id="js-close-menu">Fermer</button>
 					<a href="{{ path('task_list') }}">Tâches</a>
 					<a href="{{ path('user_list') }}">Utilisateurs</a>
 					<a href="{{ path('logout') }}" class="text-error">Déconnexion</a>
 				</nav>
 			</header>
 		{% endblock %}
-		{# <nav class="navbar navbar-light navbar-fixed-top" style="background-color: #e3f2fd;" role="navigation">
-																							<div class="container">
-																								<div class="navbar-header">
-																									<a class="navbar-brand" href="#">To Do List app</a>
-																									<img src="/images/Logo_OpenClassrooms.png" alt="OpenClassrooms"/>
-																								</div>
-																							</div>
-																						</nav> #}
 
 		<main class="main">
 			<div class="container"> {% block body %}{% endblock %}
