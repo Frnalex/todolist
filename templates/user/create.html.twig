@@ -42,6 +42,16 @@
 				</div>
 			</div>
 
+			<div>
+				<p class='text-label'>Quel(s) rôle(s) donner à cet utilisateur ?</p>
+				{% for role in form.roles %}
+					<div class='form-check'>
+						{{ form_label(role, null, {'label_attr': {'class': 'form-check-label'}}) }}
+						{{ form_widget(role, {'attr': {'class': 'form-check-input'}}) }}
+					</div>
+				{% endfor %}
+			</div>
+
 			<button type="submit" class="button">Ajouter</button>
 
 			<div class="flex center">

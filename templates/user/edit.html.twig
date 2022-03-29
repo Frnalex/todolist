@@ -1,14 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-	{# <div class="row">
-							{{ form_start(form, {'action' : path('user_edit', {'id' : user.id})}) }}
-							{{ form_widget(form) }}
-					
-							<button type="submit" class="btn btn-success pull-right">Modifier</button>
-							{{ form_end(form) }}
-						</div> #}
 
+{% block body %}
 	<section class="section">
 		<div class="section__header">
 			<h1 class="text-md">Modifier
@@ -48,6 +41,16 @@
 				<div class="text-error">
 					{{ form_errors(form.email) }}
 				</div>
+			</div>
+
+			<div>
+				<p class='text-label'>Quel(s) rôle(s) donner à cet utilisateur ?</p>
+				{% for role in form.roles %}
+					<div class='form-check'>
+						{{ form_label(role, null, {'label_attr': {'class': 'form-check-label'}}) }}
+						{{ form_widget(role, {'attr': {'class': 'form-check-input'}}) }}
+					</div>
+				{% endfor %}
 			</div>
 
 			<button type="submit" class="button">Modifier</button>
