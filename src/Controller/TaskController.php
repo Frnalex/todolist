@@ -80,6 +80,8 @@ class TaskController extends AbstractController
     #[Route('/tasks/{id}/delete', name: 'task_delete')]
     public function deleteAction(Task $task, TaskUseCase $taskUseCase)
     {
+        $this->denyAccessUnlessGranted('delete', $task);
+
         $taskUseCase->deleteAction($task);
 
         $this->addFlash('success', 'La tâche a bien été supprimée.');

@@ -26,8 +26,11 @@
 						</div>
 						<div class="task__actions">
 							<a class="text-warning" href="{{ path('task_edit', {'id' : task.id }) }}">Modifier</a>
+
+							{% if is_granted("delete", task) %}
 							/
 							<a class='text-error' href="{{ path('task_delete', {'id' : task.id }) }}">Supprimer</a>
+							{% endif %}
 						</div>
 					</div>
 					{% if not task.isDone %}
