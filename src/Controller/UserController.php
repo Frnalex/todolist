@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\UserType;
+use App\Form\CreateUserType;
+use App\Form\EditUserType;
+use App\Form\ResetPasswordType;
 use App\Repository\UserRepository;
 use App\UseCase\UserUseCase;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,7 +27,7 @@ class UserController extends AbstractController
     public function createAction(Request $request, UserUseCase $userUseCase): Response
     {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(CreateUserType::class, $user);
 
         $form->handleRequest($request);
 
@@ -45,7 +47,7 @@ class UserController extends AbstractController
     #[Route('/users/{id}/edit', name: 'user_edit')]
     public function editAction(User $user, Request $request, UserUseCase $userUseCase): Response
     {
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(EditUserType::class, $user);
 
         $form->handleRequest($request);
 
@@ -58,6 +60,27 @@ class UserController extends AbstractController
         }
 
         return $this->renderForm('user/edit.html.twig', [
+            'user' => $user,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/users/{id}/edit/reset-password', name: 'reset_password')]
+    public function resetPasswordAction(User $user, Request $request, UserUseCase $userUseCase): Response
+    {
+        $form = $this->createForm(ResetPasswordType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $userUseCase->resetPasswordAction($user);
+
+            $this->addFlash('success', "Le mot de passe a bien été modifié.");
+
+            return $this->redirectToRoute('user_list');
+        }
+
+        return $this->renderForm('user/reset-password.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);

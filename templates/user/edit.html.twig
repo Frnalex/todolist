@@ -6,6 +6,7 @@
 		<div class="section__header">
 			<h1 class="text-md">Modifier
 				{{ user.username }}</h1>
+				<a href="{{ path('reset_password', {'id' : user.id}) }}" class="button-secondary">Modifier mot de passe</a>
 		</div>
 
 		<div class="section__content w-100">
@@ -16,22 +17,6 @@
 				{{ form_widget(form.username) }}
 				<div class="text-error">
 					{{ form_errors(form.username) }}
-				</div>
-			</div>
-
-			<div>
-				{{ form_label(form.password.first) }}
-				{{ form_widget(form.password.first) }}
-				<div class="text-error">
-					{{ form_errors(form.password.first) }}
-				</div>
-			</div>
-
-			<div>
-				{{ form_label(form.password.second) }}
-				{{ form_widget(form.password.second) }}
-				<div class="text-error">
-					{{ form_errors(form.password.second) }}
 				</div>
 			</div>
 
@@ -59,7 +44,7 @@
 				<a href="{{ path('user_list') }}" class="button-secondary">Retour à la liste des utilisateurs</a>
 			</div>
 
-			{{ form_end(form) }}
+			 {{ form_end(form) }}
 		</div>
 
 	</section>

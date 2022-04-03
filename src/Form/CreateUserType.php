@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserType extends AbstractType
+class CreateUserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -28,14 +28,17 @@ class UserType extends AbstractType
                 'second_options' => ['label' => 'Tapez le mot de passe à nouveau'],
             ])
             ->add('email', EmailType::class, ['label' => 'Adresse email'])
-            ->add('roles', ChoiceType::class, [
-                'label' => 'Roles utilisateur',
-                'choices' => ['Utilisateur' => 'ROLE_USER', 'Administrateur' => 'ROLE_ADMIN'],
-                'required' => true,
-                'multiple' => true,
-                'expanded' => true,
-            ]
-        );
+            ->add(
+                'roles',
+                ChoiceType::class,
+                [
+                    'label' => 'Roles utilisateur',
+                    'choices' => ['Utilisateur' => 'ROLE_USER', 'Administrateur' => 'ROLE_ADMIN'],
+                    'required' => true,
+                    'multiple' => true,
+                    'expanded' => true,
+                ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver): void

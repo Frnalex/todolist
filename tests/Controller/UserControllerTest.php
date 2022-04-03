@@ -40,10 +40,10 @@ class UserControllerTest extends WebTestCase
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
 
         $form = $crawler->selectButton('Ajouter')->form([
-            'user[username]' => 'new-user',
-            'user[password][first]' => 'new-password',
-            'user[password][second]' => 'new-password',
-            'user[email]' => 'new-user@test.com',
+            'create_user[username]' => 'new-user',
+            'create_user[password][first]' => 'new-password',
+            'create_user[password][second]' => 'new-password',
+            'create_user[email]' => 'new-user@test.com',
         ]);
 
         $client->submit($form);
@@ -71,10 +71,30 @@ class UserControllerTest extends WebTestCase
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
 
         $form = $crawler->selectButton('Modifier')->form([
-            'user[username]' => 'user-update',
-            'user[password][first]' => 'password-update',
-            'user[password][second]' => 'password-update',
-            'user[email]' => 'update@test.com',
+            'edit_user[username]' => 'user-update',
+            'edit_user[email]' => 'update@test.com',
+            'edit_user[roles]' => ['ROLE_USER', 'ROLE_ADMIN'],
+        ]);
+
+        $client->submit($form);
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
+
+        $client->followRedirect();
+
+        $this->assertRouteSame('user_list');
+    }
+
+    public function testResetPasswordAction()
+    {
+        $client = static::createAuthenticatedClientAdmin();
+        $crawler = $client->request(Request::METHOD_GET, '/users/1/edit/reset-password');
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+
+        $form = $crawler->selectButton('Modifier')->form([
+            'reset_password[password][first]' => 'new-password',
+            'reset_password[password][second]' => 'new-password',
         ]);
 
         $client->submit($form);
