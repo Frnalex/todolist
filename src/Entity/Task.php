@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\TaskRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -12,24 +13,24 @@ class Task
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private ?int $id = null;
 
     #[ORM\Column(type: 'datetime_immutable')]
-    private $createdAt;
+    private DateTimeImmutable $createdAt;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank(message: 'Vous devez saisir un titre.')]
-    private $title;
+    private string $title;
 
     #[Assert\NotBlank(message: 'Vous devez saisir du contenu.')]
     #[ORM\Column(type: 'text')]
-    private $content;
+    private string $content;
 
     #[ORM\Column(type: 'boolean')]
-    private $isDone;
+    private bool $isDone;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
-    private $user;
+    private ?User $user = null;
 
     public function __construct()
     {
