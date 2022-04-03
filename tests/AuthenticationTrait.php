@@ -20,4 +20,19 @@ trait AuthenticationTrait
 
         return $client;
     }
+
+    public static function createAuthenticatedClientAdmin(): KernelBrowser
+    {
+        $client = static::createClient();
+        $userRepository = static::getContainer()->get(UserRepository::class);
+
+        // retrieve the test user
+        $testAdmin = $userRepository->findOneBy(['username' => 'admin']);
+
+        // simulate $testUser being logged in
+        $client->loginUser($testAdmin);
+
+        return $client;
+    }
+
 }

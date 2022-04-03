@@ -11,14 +11,21 @@ class UserControllerTest extends WebTestCase
 
     public function testListAction()
     {
-        $client = static::createAuthenticatedClient();
+        $client = static::createAuthenticatedClientAdmin();
         $client->request(Request::METHOD_GET, '/users');
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
     }
 
-    public function testDisplayCreateForm()
+    public function testListActionNotAuthorized()
     {
         $client = static::createAuthenticatedClient();
+        $client->request(Request::METHOD_GET, '/users');
+        $this->assertResponseStatusCodeSame(Response::HTTP_FORBIDDEN);
+    }
+
+    public function testDisplayCreateForm()
+    {
+        $client = static::createAuthenticatedClientAdmin();
         $client->request(Request::METHOD_GET, '/users/create');
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
@@ -27,7 +34,7 @@ class UserControllerTest extends WebTestCase
 
     public function testCreateAction()
     {
-        $client = static::createAuthenticatedClient();
+        $client = static::createAuthenticatedClientAdmin();
         $crawler = $client->request(Request::METHOD_GET, '/users/create');
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
@@ -48,9 +55,17 @@ class UserControllerTest extends WebTestCase
         $this->assertRouteSame('user_list');
     }
 
-    public function testEditAction()
+    public function testCreateActionNotAuthorized()
     {
         $client = static::createAuthenticatedClient();
+        $client->request(Request::METHOD_GET, '/users/create');
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_FORBIDDEN);
+    }
+
+    public function testEditAction()
+    {
+        $client = static::createAuthenticatedClientAdmin();
         $crawler = $client->request(Request::METHOD_GET, '/users/1/edit');
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);

@@ -1,5 +1,6 @@
 <?php
 
+use App\Repository\TaskRepository;
 use App\Tests\AuthenticationTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
@@ -73,12 +74,53 @@ class TaskControllerTest extends WebTestCase
     public function testDeleteAction()
     {
         $client = static::createAuthenticatedClient();
-        $client->request(Request::METHOD_GET, '/tasks/1/delete');
+        $taskRepository = static::getContainer()->get(TaskRepository::class);
+        $task = $taskRepository->findOneBy(['user' => '2']);
+
+        $client->request(Request::METHOD_GET, "/tasks/" . $task->getId() . "/delete");
 
         $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
 
         $client->followRedirect();
 
         $this->assertRouteSame('task_list');
+    }
+
+    public function testDeleteActionNotAuthorized()
+    {
+        $client = static::createAuthenticatedClient();
+        $taskRepository = static::getContainer()->get(TaskRepository::class);
+        $task = $taskRepository->findOneBy(['user' => '3']);
+
+        $client->request(Request::METHOD_GET, "/tasks/" . $task->getId() . "/delete");
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_FORBIDDEN);
+    }
+
+    public function testDeleteActionVisitor()
+    {
+        $client = static::createAuthenticatedClientAdmin();
+        $taskRepository = static::getContainer()->get(TaskRepository::class);
+        $task = $taskRepository->findOneBy(['user' => null]);
+
+        $client->request(Request::METHOD_GET, "/tasks/" . $task->getId() . "/delete");
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
+
+
+        $client->followRedirect();
+
+        $this->assertRouteSame('task_list');
+    }
+
+    public function testDeleteActionVisitorNotAuthorized()
+    {
+        $client = static::createAuthenticatedClient();
+        $taskRepository = static::getContainer()->get(TaskRepository::class);
+        $task = $taskRepository->findOneBy(['user' => null]);
+
+        $client->request(Request::METHOD_GET, "/tasks/" . $task->getId() . "/delete");
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_FORBIDDEN);
     }
 }

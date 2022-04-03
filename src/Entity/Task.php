@@ -15,7 +15,7 @@ class Task
     private $id;
 
     #[ORM\Column(type: 'datetime_immutable')]
-       private $createdAt;
+    private $createdAt;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank(message: 'Vous devez saisir un titre.')]
