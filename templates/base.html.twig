@@ -44,8 +44,24 @@
 		{% endblock %}
 
 		<main class="main">
-			<div class="container"> {% block body %}{% endblock %}
-				</div>
-			</main>
-		</body>
-	</html>
+			<div class="container">
+				{% for message in app.flashes('success') %}
+					<div class="flex">
+						<div class="flex alert alert-success mb-2">
+							{{ message }}
+						</div>
+					</div>
+				{% endfor %}
+				{% for message in app.flashes('warning') %}
+					<div class="flex">
+						<div class="alert alert-warning mb-2">
+							{{ message }}
+						</div>
+					</div>
+				{% endfor %}
+
+				{% block body %}{% endblock %}
+			</div>
+		</main>
+	</body>
+</html>

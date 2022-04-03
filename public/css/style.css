@@ -451,7 +451,10 @@ textarea {
     padding: 0.75rem 1rem;
     border-radius: var(--border-radius);
 }
-
+.alert.alert-success {
+    color: var(--color-success);
+    background-color: rgba(var(--rgb-success), 0.1);
+}
 .alert.alert-error {
     color: var(--color-error);
     background-color: rgba(var(--rgb-error), 0.1);
