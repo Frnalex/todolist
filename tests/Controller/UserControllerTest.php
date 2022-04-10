@@ -71,9 +71,9 @@ class UserControllerTest extends WebTestCase
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
 
         $form = $crawler->selectButton('Modifier')->form([
-            'edit_user[username]' => 'user-update',
-            'edit_user[email]' => 'update@test.com',
-            'edit_user[roles]' => ['ROLE_USER', 'ROLE_ADMIN'],
+            'user[username]' => 'user-update',
+            'user[email]' => 'update@test.com',
+            'user[roles]' => ['ROLE_USER', 'ROLE_ADMIN'],
         ]);
 
         $client->submit($form);

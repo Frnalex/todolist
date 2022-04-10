@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\CreateUserType;
-use App\Form\EditUserType;
 use App\Form\ResetPasswordType;
+use App\Form\UserType;
 use App\Repository\UserRepository;
 use App\UseCase\UserUseCase;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -47,7 +47,7 @@ class UserController extends AbstractController
     #[Route('/users/{id}/edit', name: 'user_edit')]
     public function editAction(User $user, Request $request, UserUseCase $userUseCase): Response
     {
-        $form = $this->createForm(EditUserType::class, $user);
+        $form = $this->createForm(UserType::class, $user);
 
         $form->handleRequest($request);
 
