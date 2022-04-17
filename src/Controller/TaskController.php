@@ -71,7 +71,9 @@ class TaskController extends AbstractController
 
         if ($task->isDone()) {
             $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));
-        } else {
+        }
+        
+        if (!$task->isDone()) {
             $this->addFlash('warning', sprintf('La tâche %s a bien été marquée comme non faite.', $task->getTitle()));
         }
 

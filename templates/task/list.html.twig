@@ -5,7 +5,7 @@
 		<div class="section__header">
 			<div class="flex space">
 				<h1 class="text-md">Liste des tâches</h1>
-				<a href="{{ path('task_create') }}" class="button button-round">+</a>
+				<a href="{{ path('task_create') }}" class="button button-round" name="Créer une tâche">+</a>
 			</div>
 		</div>
 
@@ -14,7 +14,7 @@
 				<div class="task {{ task.isDone ? 'isDone' : '' }}">
 					<div class="flex space">
 						<div class="flex">
-							<a class="task__toggle" href="{{ path('task_toggle', {'id' : task.id }) }}"></a>
+							<a class="task__toggle" href="{{ path('task_toggle', {'id' : task.id }) }}" name="Change le statut de {{ task.title }}"></a>
 							<a class="task__title" href="{{ path('task_edit', {'id' : task.id }) }}">
 								{% if task.user %}
 									<span class="text-italic">{{ task.user.username}}
@@ -28,8 +28,8 @@
 							<a class="text-warning" href="{{ path('task_edit', {'id' : task.id }) }}">Modifier</a>
 
 							{% if is_granted("delete", task) %}
-							/
-							<a class='text-error' href="{{ path('task_delete', {'id' : task.id }) }}">Supprimer</a>
+								/
+								<a class='text-error' href="{{ path('task_delete', {'id' : task.id }) }}">Supprimer</a>
 							{% endif %}
 						</div>
 					</div>
