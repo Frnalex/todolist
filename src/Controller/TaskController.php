@@ -7,6 +7,7 @@ use App\Form\TaskType;
 use App\Repository\TaskRepository;
 use App\UseCase\TaskUseCase;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -64,7 +65,7 @@ class TaskController extends AbstractController
     }
 
     #[Route('/tasks/{id}/toggle', name: 'task_toggle')]
-    public function toggleAction(Task $task, TaskUseCase $taskUseCase): Response
+    public function toggleAction(Task $task, TaskUseCase $taskUseCase): RedirectResponse
     {
         $taskUseCase->toggleAction($task);
 
@@ -78,7 +79,7 @@ class TaskController extends AbstractController
     }
 
     #[Route('/tasks/{id}/delete', name: 'task_delete')]
-    public function deleteAction(Task $task, TaskUseCase $taskUseCase)
+    public function deleteAction(Task $task, TaskUseCase $taskUseCase): RedirectResponse
     {
         $this->denyAccessUnlessGranted('delete', $task);
 

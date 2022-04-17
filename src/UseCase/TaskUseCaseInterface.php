@@ -6,11 +6,11 @@ use App\Entity\Task;
 
 interface TaskUseCaseInterface
 {
-    public function createAction(Task $task);
+    public function createAction(Task $task): void;
 
-    public function editAction(Task $task);
+    public function editAction(Task $task): void;
 
-    public function toggleAction(Task $task);
+    public function toggleAction(Task $task): void;
 
-    public function deleteAction(Task $task);
+    public function deleteAction(Task $task): void;
 }

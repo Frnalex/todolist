@@ -25,13 +25,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank(message: 'Vous devez saisir un mot de passe')]
-    private ?string $password = '';
+    private string $password = '';
 
     #[ORM\Column(type: 'string', length: 60, unique: true)]
     #[Assert\NotBlank(message: 'Vous devez saisir une adresse email')]
     #[Assert\Email(message: "Le format de l'adresse n'est pas correcte.")]
     private string $email;
 
+
+    /**
+     * @param array<string> $roles
+     */
     #[ORM\Column(type: 'json')]
     private array $roles = [];
 
@@ -52,19 +56,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPassword(): ?string
+    public function getPassword(): string
     {
         return $this->password;
     }
 
-    public function setPassword(?string $password): self
+    public function setPassword(string $password): self
     {
         $this->password = $password;
 
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -97,7 +101,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;

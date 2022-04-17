@@ -10,6 +10,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserFixtures extends Fixture
 {
+    private UserPasswordHasherInterface $hasher;
+
     public function __construct(UserPasswordHasherInterface $hasher)
     {
         $this->hasher = $hasher;
@@ -23,8 +25,7 @@ class UserFixtures extends Fixture
             ->setUsername('admin')
             ->setEmail('admin@gmail.com')
             ->setPassword($hash)
-            ->setRoles(['ROLE_ADMIN'])
-            ;
+            ->setRoles(['ROLE_ADMIN']);
         $manager->persist($user);
 
         for ($u = 1; $u <= 5; ++$u) {
@@ -35,8 +36,7 @@ class UserFixtures extends Fixture
             $user
                 ->setUsername("user{$u}")
                 ->setEmail("user{$u}@gmail.com")
-                ->setPassword($hash)
-            ;
+                ->setPassword($hash);
 
             $manager->persist($user);
 
