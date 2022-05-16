@@ -34,7 +34,7 @@ class Task
 
     public function __construct()
     {
-        $this->createdAt = new \DateTimeImmutable();
+        $this->createdAt = new DateTimeImmutable();
         $this->isDone = false;
     }
 
@@ -55,24 +55,24 @@ class Task
         return $this;
     }
 
-    public function getTitle(): ?string
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-    public function setTitle(?string $title): self
+    public function setTitle(string $title): self
     {
         $this->title = $title;
 
         return $this;
     }
 
-    public function getContent(): ?string
+    public function getContent(): string
     {
         return $this->content;
     }
 
-    public function setContent(?string $content): self
+    public function setContent(string $content): self
     {
         $this->content = $content;
 
@@ -84,7 +84,7 @@ class Task
         return $this->isDone;
     }
 
-    public function toggle(bool $flag)
+    public function toggle(bool $flag): void
     {
         $this->isDone = $flag;
     }

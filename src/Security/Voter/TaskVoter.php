@@ -3,7 +3,6 @@
 namespace App\Security\Voter;
 
 use App\Entity\Task;
-use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Security;
@@ -16,16 +15,22 @@ class TaskVoter extends Voter
     private Security $security;
 
     public function __construct(
-        Security $security)
-    {
+        Security $security
+    ) {
         $this->security = $security;
     }
 
+    /**
+     * @param Task $task
+     */
     protected function supports(string $attribute, $task): bool
     {
         return in_array($attribute, [self::DELETE]) && $task instanceof Task;
     }
 
+    /**
+     * @param Task $task
+     */
     protected function voteOnAttribute(string $attribute, $task, TokenInterface $token): bool
     {
         $user = $token->getUser();
@@ -33,16 +38,14 @@ class TaskVoter extends Voter
             return false;
         }
 
-        switch ($attribute) {
-            case self::DELETE:
-                return $this->canDelete($task, $user);
-                break;
+        if ($attribute === self::DELETE) {
+            return $this->canDelete($task, $user);
         }
 
         return false;
     }
 
-    private function canDelete(Task $task, User $user): bool
+    private function canDelete(Task $task, UserInterface $user): bool
     {
         if ($task->getUser() === $user) {
             return true;

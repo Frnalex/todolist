@@ -11,11 +11,8 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     #[Route('/login', name: 'login')]
-    public function loginAction(AuthenticationUtils $authenticationUtils, UserRepository $userRepository): Response
+    public function loginAction(AuthenticationUtils $authenticationUtils): Response
     {
-        // $user = $userRepository->findOneBy(['username' => 'user1']);
-        // dd($user);
-
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
@@ -26,13 +23,13 @@ class SecurityController extends AbstractController
     }
 
     #[Route('/login_check', name: 'login_check')]
-    public function loginCheck()
+    public function loginCheck(): void
     {
         // This code is never executed.
     }
 
     #[Route('/logout', name: 'logout')]
-    public function logout()
+    public function logout(): void
     {
         // This code is never executed.
     }

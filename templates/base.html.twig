@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang='fr'>
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="todolist">
 		<title>
 			{% block title %}Welcome!
 			{% endblock %}
 		</title>
-		<link
-		rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+
 		{% block stylesheets %}
-			{# <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> #}
 			<link href="{{ asset("/css/reset.css" )}}" rel="stylesheet">
 			<link href="{{ asset("/css/style.css" )}}" rel="stylesheet">
 		{% endblock %}
@@ -23,15 +23,15 @@
 		{% block header %}
 			<header class="header">
 				<h1 class="text-lg">
-					<a href="{{ path('homepage') }}">To Do List app</a>
+					<a href="{{ path('homepage') }}" name="Accueil">To Do List app</a>
 				</h1>
-				<button class="nav__open" id="js-open-menu">
+				<a class="nav__open" id="js-open-menu" name="Ouvrir menu">
 					<span class="line-1"></span>
 					<span class="line-2"></span>
 					<span class="line-3"></span>
-				</button>
+				</a>
 				<nav class="nav" id='js-menu'>
-					<button class="mb-2 text-bold nav__close" id="js-close-menu">Fermer</button>
+					<a class="mb-2 text-bold nav__close" id="js-close-menu" name="Fermer menu">Fermer</a>
 					{% set current_path = app.request.get('_route') %}
 					<a href="{{ path('homepage') }}" {% if current_path == "homepage" %} class="active" {% endif %}>Accueil</a>
 					<a href="{{ path('task_list') }}" {% if current_path == "task_list" %} class="active" {% endif %}>Tâches</a>

@@ -26,7 +26,7 @@
     --color-light: #f5f7fa;
     --color-primary: #2e5599;
     --color-secondary: #cbd4e5;
-    --color-error: #d94343;
+    --color-error: #cd2525;
     --color-warning: #e77e1d;
     --color-success: #34a13f;
 
@@ -125,9 +125,12 @@ body {
 .text-warning {
     color: var(--color-warning) !important;
 }
+.text-primary {
+    color: var(--color-primary) !important;
+}
 
 .text-bold {
-    font-weight: bold;
+    font-weight: 600;
 }
 .text-italic {
     font-style: italic;
@@ -183,6 +186,7 @@ body {
     width: 40px;
     height: 40px;
     position: relative;
+    cursor: pointer;
 }
 
 .nav__open .line-1,
