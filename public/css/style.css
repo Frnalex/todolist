@@ -125,6 +125,9 @@ body {
 .text-warning {
     color: var(--color-warning) !important;
 }
+.text-primary {
+    color: var(--color-primary) !important;
+}
 
 .text-bold {
     font-weight: 600;

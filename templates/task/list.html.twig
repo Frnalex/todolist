@@ -25,7 +25,7 @@
 							</a>
 						</div>
 						<div class="task__actions">
-							<a class="text-warning" href="{{ path('task_edit', {'id' : task.id }) }}">Modifier</a>
+							<a class="text-primary" href="{{ path('task_edit', {'id' : task.id }) }}">Modifier</a>
 
 							{% if is_granted("delete", task) %}
 								/

@@ -34,7 +34,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
 
     /**
-     * @param array<string> $roles
+     * @var array<array-key,string> $roles
      */
     #[ORM\Column(type: 'json')]
     private array $roles = [];
@@ -94,6 +94,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return array_unique($roles);
     }
 
+    /**
+     * @param array<array-key,string> $roles
+     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
