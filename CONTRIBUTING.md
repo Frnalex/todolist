@@ -52,3 +52,5 @@ Commande pour lancer les tests : `php bin/phpunit`
 
 Pour pouvoir soumettre une pull request, veillez à bien suivre l'étape 4.
 Ensuite, rendez-vous dans la section [pull request](https://github.com/Frnalex/todolist/pulls) du projet et créez une nouvelle pull request.
+
+Quand vous faîtes une pull request, n'hésitez pas à demander aux personnes travaillant sur le projet de review votre code. Outre le fait d'avoir des retours sur votre code, cela permet à tout le monde de voir ce qui a été fait et ce qu'il reste à faire sur le projet.
