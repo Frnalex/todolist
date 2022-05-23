@@ -40,6 +40,15 @@ Développez de nouvelles fonctionnalités ou corrigez des bugs, tout en respecta
 -   Respectez les standards de codage définis par le [PHP-FIG](https://www.php-fig.org), notamment le PSR-4 pour l'autoloading et le PSR-1 et le PSR-12 pour le style de code.
 -   Respectez les [bonnes pratiques définies par Symfony](https://symfony.com/doc/current/best_practices.html)
 -   Respectez la structure des fichiers et la logique mise en place dans l'application.
+-   Pour les messages de vos commits, veuillez respecter la structure suivante. Plus de détails sur la [spécification de Conventional Commits](https://www.conventionalcommits.org/fr/v1.0.0):
+
+```text
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
 
 ### 6. Tester
 
