@@ -67,6 +67,12 @@ class TaskControllerTest extends WebTestCase
         $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
 
         $client->followRedirect();
+        
+        $client->request(Request::METHOD_GET, '/tasks/1/toggle');
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
+
+        $client->followRedirect();
 
         $this->assertRouteSame('task_list');
     }

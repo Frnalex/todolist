@@ -73,7 +73,7 @@ class UserControllerTest extends WebTestCase
         $form = $crawler->selectButton('Modifier')->form([
             'user[username]' => 'user-update',
             'user[email]' => 'update@test.com',
-            'user[roles]' => ['ROLE_USER', 'ROLE_ADMIN'],
+            'user[roles]' => ['ROLE_USER'],
         ]);
 
         $client->submit($form);
