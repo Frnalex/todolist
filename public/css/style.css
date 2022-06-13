@@ -92,6 +92,9 @@ body {
         padding-left: 3rem;
         padding-right: 3rem;
     }
+    .hidden-lg {
+        display: none !important;
+    }
 }
 
 /* SPACING */

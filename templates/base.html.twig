@@ -31,7 +31,7 @@
 					<span class="line-3"></span>
 				</a>
 				<nav class="nav" id='js-menu'>
-					<a class="mb-2 text-bold nav__close" id="js-close-menu" name="Fermer menu">Fermer</a>
+					<a class="mb-2 text-bold nav__close hidden-lg" id="js-close-menu" name="Fermer menu">Fermer</a>
 					{% set current_path = app.request.get('_route') %}
 					<a href="{{ path('homepage') }}" {% if current_path == "homepage" %} class="active" {% endif %}>Accueil</a>
 					<a href="{{ path('task_list') }}" {% if current_path == "task_list" %} class="active" {% endif %}>Tâches</a>
