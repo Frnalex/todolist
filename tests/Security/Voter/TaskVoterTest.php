@@ -77,20 +77,4 @@ class ProjectVoterTest extends TestCase
         
         $this->assertEquals(TaskVoter::ACCESS_DENIED, $voter->vote($token, $task, [TaskVoter::DELETE]));
     }
-
-    // public function testVoteWhenAttributeDoesNotExist()
-    // {
-    //     $security = $this->createMock(Security::class);
-    //     $voter = new TaskVoter($security);
-
-    //     /** @var MockObject|TokenInterface */
-    //     $token = $this->createMock(TokenInterface::class);
-    //     $user = new User();
-    //     $token->method('getUser')->willReturn($user);
-
-    //     $task = new Task();
-    //     $task->setUser($user);
-        
-    //     $this->assertEquals(TaskVoter::ACCESS_DENIED, $voter->vote($token, $task, ['this-attribute-does-not-exist', 'delete']));
-    // }
 }
